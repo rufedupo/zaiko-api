@@ -11,7 +11,6 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: 40275028
@@ -19,6 +18,7 @@ default: &default
 
 development:
   <<: *default
+  encoding: utf8mb4
   database: zaiko_api_development
 
 # Warning: The database defined as "test" will be erased and
@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
+  encoding: utf8
   database: zaiko_api_production
   username: zaiko_api
   password: <%= ENV['ZAIKO_API_DATABASE_PASSWORD'] %>
