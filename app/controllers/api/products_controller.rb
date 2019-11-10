@@ -5,7 +5,7 @@ class Api::ProductsController < ApplicationController
     render json: products, status: 200
   end
 
-  def create  
+  def create
     product = products.build(product_params)
 
     if product.save
@@ -37,6 +37,6 @@ class Api::ProductsController < ApplicationController
   end
 
   def products
-    Product.ransack(params[:q]).result
+    Product.ransack(params[:q]).result.order(:name)
   end
 end
