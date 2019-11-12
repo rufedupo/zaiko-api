@@ -5,19 +5,21 @@ class Api::ProductsController < ApplicationController
     render json: products, status: 200
   end
 
-  def create
-    product = products.build(product_params)
+  def show
+    render json: product, status: 200  
+  end
 
-    if product.save
-      render json: product, status: 201
+  def create
+    newProduct = products.build(product_params)
+    
+    if newProduct.save
+      render json: newProduct, status: 201
     else
-      render json: { errors: product.errors }, status: 422
+      render json: { errors: newProduct.errors }, status: 422
     end
   end
 
   def update
-    product = products.find(params[:id])
-
     if product.update_attributes(product_params)
       render json: product, status: 200
     else
@@ -26,7 +28,6 @@ class Api::ProductsController < ApplicationController
   end
 
   def destroy
-    product = products.find(params[:id])
     product.destroy
     head 204
   end
@@ -38,5 +39,9 @@ class Api::ProductsController < ApplicationController
 
   def products
     Product.ransack(params[:q]).result.order(:name)
+  end
+
+  def product
+    product = products.find(params[:id])
   end
 end
