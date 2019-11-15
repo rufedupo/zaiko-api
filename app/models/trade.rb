@@ -1,4 +1,5 @@
 class Trade < ApplicationRecord
+  belongs_to :user
   has_many :operations, dependent: :destroy
   
   #kind > stock_in = 0 | stock_out = 1 | sale = 2
